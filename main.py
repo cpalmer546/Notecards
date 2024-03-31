@@ -21,7 +21,7 @@ def create_note_cards(font):
 
 def main(screen):
     """
-    Main game loop
+    Main game function
 
     Takes the pygame screen as param
     """
@@ -30,12 +30,15 @@ def main(screen):
 
     font = pg.font.SysFont('Arial', 30)
 
+    # Game variables
     main_loop = True
     is_pushed = False
     note_cards = create_note_cards(font)
     current_pos_in_note_cards = 0
     buttons = []
     top_left_of_buttons = [0, 350]
+
+    # Create buttons
     left_button = Button(top_left_of_buttons[0] + 5, top_left_of_buttons[1], 95, 50, font, '<---', True)
     right_button = Button(top_left_of_buttons[0] + 205, top_left_of_buttons[1], 95, 50, font, '--->', True)
     flip_button = Button(top_left_of_buttons[0] + 105, top_left_of_buttons[1], 95, 50, font, 'Flip', True)
@@ -48,6 +51,7 @@ def main(screen):
 
     exit_button = Button(10, 740, 200, 50, font, 'Exit', True)
 
+    # add all buttons to a list to be able to iterate over them
     buttons.append(left_button)
     buttons.append(right_button)
     buttons.append(flip_button)
@@ -55,6 +59,7 @@ def main(screen):
     buttons.append(turn_all_cards_front_down)
     buttons.append(exit_button)
 
+    # main game loop
     while main_loop:
         screen.fill('black')
         screen.blit(study_port_surface, (305, 0))
@@ -85,19 +90,23 @@ def main(screen):
                         is_pushed = True
                         note_cards[current_pos_in_note_cards].turn_card_over()
 
+        # displays the card on screen with .show_card method
         note_cards[current_pos_in_note_cards].show_card(screen, font)
 
         if exit_button.process():
             pg.quit()
             sys.exit()
 
+        # iterate over button list to show buttons on screen
         for button in buttons:
             button.draw(screen)
 
+        # some checks to see if any of the buttons were pressed
         if flip_button.process():
             if not is_pushed:
                 is_pushed = True
                 note_cards[current_pos_in_note_cards].turn_card_over()
+
         elif right_button.process():
             if not is_pushed:
                 is_pushed = True
@@ -105,6 +114,7 @@ def main(screen):
 
                 if len(note_cards) < current_pos_in_note_cards + 1:
                     current_pos_in_note_cards = 0
+
         elif left_button.process():
             if not is_pushed:
                 is_pushed = True
@@ -133,7 +143,7 @@ def main(screen):
 
 if __name__ == '__main__':
     """
-    Function to run to start the program
+    The start of code execution
     """
     pg.init()
 

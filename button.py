@@ -19,11 +19,14 @@ class Button:
 
         # pg.Surface is used to represent images
         self.button_surface = pg.Surface((self.w, self.h))
+
         # pg.Rect stores rectangular coordinates
         self.button_rect = pg.Rect(self.x, self.y, self.w, self.h)
+
         # draw text on a new surface
         self.button_surf = font.render(button_text, True, (20, 20, 20))
 
+    # draws the button on screen
     def draw(self, screen):
         # gets the mouse position
         mouse_pos = pg.mouse.get_pos()
@@ -39,6 +42,7 @@ class Button:
                                                     self.button_rect.h / 2 - self.button_surf.get_rect().h / 2])
         screen.blit(self.button_surface, self.button_rect)
 
+    # Will return true if button is pressed
     def process(self):
         mouse_pos = pg.mouse.get_pos()
         if self.button_rect.collidepoint(mouse_pos):
