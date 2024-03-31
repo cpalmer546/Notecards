@@ -35,7 +35,8 @@ class Button:
             if pg.mouse.get_pressed(num_buttons=3)[0]:
                 self.button_surface.fill(self.fill_colors['pressed'])
 
-        self.button_surface.blit(self.button_surf, [self.button_rect.w / 2 - self.button_surf.get_rect().w / 2, self.button_rect.h / 2 - self.button_surf.get_rect().h / 2])
+        self.button_surface.blit(self.button_surf, [self.button_rect.w / 2 - self.button_surf.get_rect().w / 2,
+                                                    self.button_rect.h / 2 - self.button_surf.get_rect().h / 2])
         screen.blit(self.button_surface, self.button_rect)
 
     def process(self):
