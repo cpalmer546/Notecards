@@ -1,6 +1,19 @@
 import pygame as pg
 
 
+def text_wrap(info):
+    list_of_lines = []
+    text_to_app = ''
+    for i in info:
+        if i == '\n':
+            list_of_lines.append(text_to_app)
+            text_to_app = ''
+        else:
+            text_to_app += i
+    list_of_lines.append(text_to_app)
+    return list_of_lines
+
+
 class NoteCard:
     front: str
     back: list
@@ -42,7 +55,7 @@ class NoteCard:
         else:
             font = pg.font.SysFont('Arial', 22)
             self.note_card_surface.fill('white')
-            display_text = self.text_wrap_that_hoe(self.display_card_info())
+            display_text = text_wrap(self.display_card_info())
 
             down_line = 5
 
@@ -51,15 +64,3 @@ class NoteCard:
                 self.note_card_surface.blit(self.note_card_surf, [2, down_line])
                 screen.blit(self.note_card_surface, self.note_card_rect)
                 down_line += 25
-
-    def text_wrap_that_hoe(self, info):
-        list_of_lines = []
-        text_to_app = ''
-        for i in info:
-            if i == '\n':
-                list_of_lines.append(text_to_app)
-                text_to_app = ''
-            else:
-                text_to_app += i
-        list_of_lines.append(text_to_app)
-        return list_of_lines
