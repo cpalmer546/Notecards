@@ -49,7 +49,7 @@ def main(screen):
     turn_all_cards_front_down = Button(top_left_of_buttons[0] + 40, top_left_of_buttons[1] + 165, 220, 50, font,
                                        "Turn cards down", True)
 
-    exit_button = Button(10, 740, 200, 50, font, 'Exit', True)
+    exit_button = Button(10, 740, 110, 50, font, 'Exit', True)
 
     # add all buttons to a list to be able to iterate over them
     buttons.append(left_button)
