@@ -35,16 +35,25 @@ def main(screen):
     note_cards = create_note_cards(font)
     current_pos_in_note_cards = 0
     buttons = []
-    top_left_of_buttons = [0, 500]
+    top_left_of_buttons = [0, 350]
     left_button = Button(top_left_of_buttons[0] + 5, top_left_of_buttons[1], 95, 50, font, '<---', True)
     right_button = Button(top_left_of_buttons[0] + 205, top_left_of_buttons[1], 95, 50, font, '--->', True)
     flip_button = Button(top_left_of_buttons[0] + 105, top_left_of_buttons[1], 95, 50, font, 'Flip', True)
+
+    turn_all_cards_front_upright = Button(top_left_of_buttons[0] + 5, top_left_of_buttons[1] + 110, 220, 50, font,
+                                          "Turn cards upright", True)
+
+    turn_all_cards_front_down = Button(top_left_of_buttons[0] + 5, top_left_of_buttons[1] + 165, 220, 50, font,
+                                       "Turn cards down", True)
+
     exit_button = Button(10, 740, 200, 50, font, 'Exit', True)
 
-    buttons.append(exit_button)
     buttons.append(left_button)
     buttons.append(right_button)
     buttons.append(flip_button)
+    buttons.append(turn_all_cards_front_upright)
+    buttons.append(turn_all_cards_front_down)
+    buttons.append(exit_button)
 
     while main_loop:
         screen.fill('black')
@@ -103,6 +112,18 @@ def main(screen):
 
                 if current_pos_in_note_cards < 0:
                     current_pos_in_note_cards = len(note_cards) - 1
+
+        elif turn_all_cards_front_upright.process():
+            if not is_pushed:
+                is_pushed = True
+                for card in note_cards:
+                    card.is_turned = False
+
+        elif turn_all_cards_front_down.process():
+            if not is_pushed:
+                is_pushed = True
+                for card in note_cards:
+                    card.is_turned = True
         else:
             is_pushed = False
 
