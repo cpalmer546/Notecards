@@ -43,10 +43,10 @@ def main(screen):
     right_button = Button(top_left_of_buttons[0] + 205, top_left_of_buttons[1], 95, 50, font, '--->', True)
     flip_button = Button(top_left_of_buttons[0] + 105, top_left_of_buttons[1], 95, 50, font, 'Flip', True)
 
-    turn_all_cards_front_upright = Button(top_left_of_buttons[0] + 5, top_left_of_buttons[1] + 110, 220, 50, font,
+    turn_all_cards_front_upright = Button(top_left_of_buttons[0] + 40, top_left_of_buttons[1] + 110, 220, 50, font,
                                           "Turn cards upright", True)
 
-    turn_all_cards_front_down = Button(top_left_of_buttons[0] + 5, top_left_of_buttons[1] + 165, 220, 50, font,
+    turn_all_cards_front_down = Button(top_left_of_buttons[0] + 40, top_left_of_buttons[1] + 165, 220, 50, font,
                                        "Turn cards down", True)
 
     exit_button = Button(10, 740, 200, 50, font, 'Exit', True)
