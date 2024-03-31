@@ -22,8 +22,8 @@ def create_note_cards(font):
 def main(screen):
     """
     Main game loop
-    :param screen:
-    :return:
+
+    Takes the pygame screen as param
     """
     study_port_surface = pg.Surface((900, 800))
     study_port_surface.fill('grey')
@@ -71,7 +71,7 @@ def main(screen):
                         if current_pos_in_note_cards < 0:
                             current_pos_in_note_cards = len(note_cards) - 1
 
-                elif event.key == pg.K_UP or event.key == pg.K_DOWN:
+                elif event.key == pg.K_UP or event.key == pg.K_DOWN or event.key == pg.K_SPACE:
                     if not is_pushed:
                         is_pushed = True
                         note_cards[current_pos_in_note_cards].turn_card_over()
