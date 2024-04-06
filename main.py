@@ -1,16 +1,23 @@
 import sys
 import csv
+
 import pygame as pg
 
+from random import shuffle
 from button import Button
 from notecard import NoteCard
+from tkinter.filedialog import askopenfilename
 
 
 def create_note_cards(font):
     note_card_deck = []
     index = 1
+    file = askopenfilename()
 
-    with open("cards.csv", newline='') as csvfile:
+    if file is None:
+        return
+
+    with open(file, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             new_card = NoteCard(font, row['FRONT'], row['BACK'], index)
@@ -30,10 +37,16 @@ def main(screen):
 
     font = pg.font.SysFont('Arial', 30)
 
+    # Display while csv file is being selected:
+
     # Game variables
     main_loop = True
     is_pushed = False
     note_cards = create_note_cards(font)
+
+    if note_cards is None:
+        return
+
     current_pos_in_note_cards = 0
     buttons = []
     top_left_of_buttons = [0, 350]
@@ -49,6 +62,12 @@ def main(screen):
     turn_all_cards_front_down = Button(top_left_of_buttons[0] + 40, top_left_of_buttons[1] + 165, 220, 50, font,
                                        "Turn cards down", True)
 
+    shuffle_button = Button(top_left_of_buttons[0] + 40, top_left_of_buttons[1] + 220, 220, 50, font,
+                            "Shuffle", True)
+
+    order_button = Button(top_left_of_buttons[0] + 40, top_left_of_buttons[1] + 275, 220, 50, font,
+                          "Order", True)
+
     exit_button = Button(10, 740, 110, 50, font, 'Exit', True)
 
     # add all buttons to a list to be able to iterate over them
@@ -57,6 +76,8 @@ def main(screen):
     buttons.append(flip_button)
     buttons.append(turn_all_cards_front_upright)
     buttons.append(turn_all_cards_front_down)
+    buttons.append(shuffle_button)
+    buttons.append(order_button)
     buttons.append(exit_button)
 
     # main game loop
@@ -134,6 +155,19 @@ def main(screen):
                 is_pushed = True
                 for card in note_cards:
                     card.is_turned = True
+
+        elif shuffle_button.process():
+            if not is_pushed:
+                is_pushed = True
+                shuffle(note_cards)
+                current_pos_in_note_cards = 0
+
+        elif order_button.process():
+            if not is_pushed:
+                is_pushed = True
+                note_cards.sort(key=lambda x: x.index)
+                current_pos_in_note_cards = 0
+
         else:
             is_pushed = False
 

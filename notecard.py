@@ -50,6 +50,11 @@ class NoteCard:
             self.note_card_surface.blit(self.note_card_surf,
                                         [self.note_card_rect.w / 2 - self.note_card_surf.get_rect().w / 2,
                                          self.note_card_rect.h / 2 - self.note_card_surf.get_rect().h / 2])
+
+            index_font = pg.font.SysFont('Arial', 22)
+            self.note_card_index = index_font.render(str(self.index), True, (20, 20, 20))
+            self.note_card_surface.blit(self.note_card_index, [10, 5])
+
             screen.blit(self.note_card_surface, self.note_card_rect)
 
         else:
@@ -61,6 +66,6 @@ class NoteCard:
 
             for line in display_text:
                 self.note_card_surf = font.render(line, True, (20, 20, 20))
-                self.note_card_surface.blit(self.note_card_surf, [2, down_line])
+                self.note_card_surface.blit(self.note_card_surf, [5, down_line])
                 screen.blit(self.note_card_surface, self.note_card_rect)
                 down_line += 25
