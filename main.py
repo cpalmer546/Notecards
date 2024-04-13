@@ -36,8 +36,15 @@ def main(screen):
     study_port_surface.fill('grey')
 
     font = pg.font.SysFont('Arial', 30)
+    big_font = pg.font.SysFont('Arial', 56)
 
     # Display while csv file is being selected:
+
+    # draw text on a new surface
+    screen_default_surf = big_font.render("Select csv file for note cards", True, "white")
+    screen.fill("black")
+    screen.blit(screen_default_surf, (50, 50))
+    pg.display.flip()
 
     # Game variables
     main_loop = True
