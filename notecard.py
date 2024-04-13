@@ -50,15 +50,15 @@ class NoteCard:
             self.note_card_surface.blit(self.note_card_surf,
                                         [self.note_card_rect.w / 2 - self.note_card_surf.get_rect().w / 2,
                                          self.note_card_rect.h / 2 - self.note_card_surf.get_rect().h / 2])
-
-            index_font = pg.font.SysFont('Arial', 22)
+            # adds index to top left of card
+            index_font = pg.font.SysFont('Arial', 20)
             self.note_card_index = index_font.render(str(self.index), True, (20, 20, 20))
             self.note_card_surface.blit(self.note_card_index, [10, 5])
 
             screen.blit(self.note_card_surface, self.note_card_rect)
 
         else:
-            font = pg.font.SysFont('Arial', 22)
+            font = pg.font.SysFont('Arial', 24)
             self.note_card_surface.fill('white')
             display_text = text_wrap(self.display_card_info())
 
